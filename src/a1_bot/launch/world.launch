@@ -1,7 +1,7 @@
 <launch> 
  
 <!-- World File --> 
-  <arg name="world_file" default="$(find a1_bot)/worlds/empty.world"/> 
+  <arg name="world_file" default="$(find a1_bot)/worlds/sample_world.world"/> 
  
 
 <!-- Launch Gazebo World --> 
@@ -29,5 +29,7 @@
               -x $(arg x) -y $(arg y) -z $(arg z)
               -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
  
+<!--launch rviz-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find a1_bot)/rviz_config/a1_bot.rviz" respawn="false"/>
 
 </launch>
