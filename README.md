@@ -7,4 +7,4 @@ A (custom build) robot move autonomously around the environment and map(SLAM) it
         1.2 Make launch file - done
         1.3 Add Sonar sensor - done
     2. Manual gmapping (SLAM): teleop robot to create a map - done
-    3. Autonously gmapping (using SLAM) - pending
+    3. Autonously gmapping (using SLAM) - In progress
