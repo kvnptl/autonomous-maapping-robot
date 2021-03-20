@@ -1,12 +1,14 @@
 <?xml version='1.0'?>
 
-<robot name="a1_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="a1_bot"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include filename="$(find a1_bot)/urdf/a1_bot.gazebo" />
 
   <link name="robot_footprint"></link>
 
   <joint name="robot_footprint_joint" type="fixed">
-    <origin xyz="0 0 0.124" rpy="0 0 0" /> <!-- keep robot wheels on the groud (offset value as per robot visual)-->
+    <origin xyz="0 0 0.124" rpy="0 0 0" />
+    <!-- keep robot wheels on the groud (offset value as per robot visual)-->
     <parent link="robot_footprint"/>
     <child link="chassis" />
   </joint>
@@ -17,15 +19,11 @@
     <inertial>
       <mass value="15.0"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
-      <inertia
-          ixx="0.1" ixy="0" ixz="0"
-          iyy="0.1" iyz="0"
-          izz="0.1"
-      />
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1" />
     </inertial>
 
     <collision name='collision'>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
         <cylinder radius="0.2" length="0.05"/>
       </geometry>
@@ -70,25 +68,25 @@
 
 
   <gazebo reference="chassis">
-     <material>Gazebo/Orange</material>
+    <material>Gazebo/Orange</material>
   </gazebo>
   <gazebo reference="left_wheel">
-     <material>Gazebo/Blue</material>
+    <material>Gazebo/Blue</material>
   </gazebo>
   <gazebo reference="right_wheel">
-     <material>Gazebo/Blue</material>
+    <material>Gazebo/Blue</material>
   </gazebo>
   <gazebo reference="camera">
-     <material>Gazebo/Red</material>
+    <material>Gazebo/Red</material>
   </gazebo>
 
 
   <link name="left_wheel">
     <inertial>
-       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
-       <mass value="5"/>
-       <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
-     </inertial>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <mass value="5"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <geometry>
@@ -114,10 +112,10 @@
 
   <link name="right_wheel">
     <inertial>
-       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
-       <mass value="5"/>
-       <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
-     </inertial>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <mass value="5"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
       <geometry>
@@ -141,13 +139,14 @@
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
+  <!-- add 2D RGB camera sensor -->
   <link name="camera">
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <inertial>
-       <origin xyz="0 0 0" rpy="0 0 0"/>
-       <mass value="0.1"/>
-       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
-     </inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -173,13 +172,14 @@
     <dynamics damping="1.0" friction="1.0"/>
   </joint>
 
+  <!-- add laser range finder sensor -->
   <link name="hokuyo">
 
     <inertial>
-       <origin xyz="0 0 0" rpy="0 0 0"/>
-       <mass value="1e-5"/>
-       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
-     </inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-5"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -213,5 +213,33 @@
 
   <link name="camera_optical">
   </link>
+
+  <!-- add sonar sensor to robot -->
+  <link name="base_sonar">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="sonar_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin rpy="0 1.57 0" xyz="0.15 -0.1 -0.03" />
+    <parent link="chassis"/>
+    <child link="base_sonar"/>
+  </joint>
 
 </robot>

@@ -8,6 +8,9 @@
 	"settings": {
 		"python.autoComplete.extraPaths": [
 			"/opt/ros/melodic/lib/python2.7/dist-packages"
-		]
+		],
+		"editor.formatOnSave": true,
+		"editor.formatOnType": true,
+		"editor.formatOnPaste": true
 	}
 }
